@@ -1,0 +1,66 @@
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.high-contrast {
+    filter: contrast(125%);
+}
+
+.text-large {
+    font-size: 1.15rem !important;
+}
+
+.text-large p,
+.text-large button,
+.text-large input,
+.text-large span {
+    font-size: 1.15rem !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Tab Navigation Styling */
+.tab-btn {
+    color: #64748b;
+}
+
+.dark .tab-btn {
+    color: #94a3b8;
+}
+
+.tab-btn:hover {
+    background-color: rgba(241, 245, 249, 1);
+    color: #0f172a;
+}
+
+.dark .tab-btn:hover {
+    background-color: rgba(51, 65, 85, 0.5);
+    color: #f8fafc;
+}
+
+.tab-btn.active-tab {
+    background-color: #f37021;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(243, 112, 33, 0.2);
+}
