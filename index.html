@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardião Digital .Senac - Cibersegurança e Prevenção de Golpes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                        },
+                        senac: {
+                            orange: '#f37021',
+                            dark: '#004a80'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <header
+        class="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/90 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2 sm:space-x-3 overflow-hidden">
+                <div class="p-2 bg-orange-600 text-white rounded-xl shadow-md shrink-0">
+                    <i class="fa-solid fa-shield-halved text-lg sm:text-xl"></i>
+                </div>
+                <span
+                    class="font-bold text-base sm:text-xl tracking-tight bg-gradient-to-r from-orange-600 to-sky-600 bg-clip-text text-transparent truncate">
+                    Guardião Digital <span class="text-orange-600">.Senac</span>
+                </span>
+            </div>
+
+            <!-- Global Accessibility & Theme Controls -->
+            <div class="flex items-center space-x-1 sm:space-x-3 shrink-0">
+                <button id="btnSound" onclick="toggleSound()"
+                    class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition"
+                    title="Alternar Efeitos Sonoros" aria-label="Efeitos Sonoros">
+                    <i class="fa-solid fa-volume-high text-base sm:text-lg" id="soundIcon"></i>
+                </button>
+                <button id="btnFontSize" onclick="toggleFontSize()"
+                    class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition"
+                    title="Aumentar/Diminuir Fonte" aria-label="Ajustar Fonte">
+                    <i class="fa-solid fa-font text-base sm:text-lg"></i>
+                </button>
+                <button id="btnContrast" onclick="toggleContrast()"
+                    class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition"
+                    title="Alto Contraste" aria-label="Alto Contraste">
+                    <i class="fa-solid fa-circle-half-stroke text-base sm:text-lg"></i>
+                </button>
+                <button id="btnTheme" onclick="toggleDarkMode()"
+                    class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition"
+                    title="Modo Escuro/Claro" aria-label="Alternar Tema">
+                    <i class="fa-solid fa-moon text-base sm:text-lg" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col gap-6 sm:gap-8">
+
+        <!-- Hero Banner / Introdução -->
+        <section
+            class="bg-gradient-to-r from-orange-600 via-sky-700 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-lg relative overflow-hidden">
+            <div class="relative z-10 max-w-3xl">
+                <span
+                    class="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+                    Inovação & Cibersegurança .Senac
+                </span>
+                <h1 class="text-2xl sm:text-4xl font-extrabold mb-4 leading-tight">
+                    Fortaleça suas Senhas & Mantenha-se Livre de Golpes na Web
+                </h1>
+                <p class="text-slate-100 text-sm sm:text-lg mb-6 leading-relaxed">
+                    Aprenda de forma prática a proteger suas contas digitais, criar senhas imbatíveis e reconhecer
+                    tentativas de fraude, engenharia social e phishing antes que seja tarde.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#sec-checker"
+                        class="bg-white text-orange-700 hover:bg-slate-100 font-semibold px-4 sm:px-5 py-2.5 rounded-xl transition shadow text-sm sm:text-base">
+                        <i class="fa-solid fa-key mr-2"></i>Testar Senha
+                    </a>
+                    <a href="#sec-quiz"
+                        class="bg-black/30 hover:bg-black/50 border border-white/30 font-semibold px-4 sm:px-5 py-2.5 rounded-xl transition backdrop-blur text-sm sm:text-base">
+                        <i class="fa-solid fa-gamepad mr-2"></i>Simulador de Golpes
+                    </a>
+                </div>
+            </div>
+            <i
+                class="fa-solid fa-user-shield absolute -right-10 -bottom-10 text-[150px] sm:text-[200px] text-white/10 pointer-events-none"></i>
+        </section>
+
+        <!-- Navigation Tabs (Com rolagem horizontal suave no mobile) -->
+        <nav class="flex overflow-x-auto gap-2 border-b border-slate-200 dark:border-slate-700 pb-2 scrollbar-none">
+            <button onclick="switchTab('checker')" id="tab-checker"
+                class="tab-btn active-tab px-4 py-2.5 font-medium text-sm sm:text-base rounded-xl transition flex items-center space-x-2 shrink-0">
+                <i class="fa-solid fa-shield-virus"></i>
+                <span>Testador de Senhas</span>
+            </button>
+            <button onclick="switchTab('passphrase')" id="tab-passphrase"
+                class="tab-btn px-4 py-2.5 font-medium text-sm sm:text-base rounded-xl transition flex items-center space-x-2 shrink-0">
+                <i class="fa-solid fa-quote-left"></i>
+                <span>Frases-Chave (Passphrase)</span>
+            </button>
+            <button onclick="switchTab('quiz')" id="tab-quiz"
+                class="tab-btn px-4 py-2.5 font-medium text-sm sm:text-base rounded-xl transition flex items-center space-x-2 shrink-0">
+                <i class="fa-solid fa-user-ninja"></i>
+                <span>Simulador de Golpes</span>
+            </button>
+            <button onclick="switchTab('checklist')" id="tab-checklist"
+                class="tab-btn px-4 py-2.5 font-medium text-sm sm:text-base rounded-xl transition flex items-center space-x-2 shrink-0">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Checklist de Segurança</span>
+            </button>
+        </nav>
+
+        <!-- TAB 1: TESTADOR DE FORÇA DE SENHA E GERADOR -->
+        <section id="sec-checker" class="tab-content grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+            <!-- Testador -->
+            <div
+                class="lg:col-span-7 bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                <div>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <h2 class="text-lg sm:text-xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-orange-600 dark:text-orange-400"></i>
+                            Analisador de Senhas
+                        </h2>
+                        <span
+                            class="text-xs bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-2.5 py-1 rounded-md self-start sm:self-auto">100%
+                            Seguro (.Senac Local)</span>
+                    </div>
+
+                    <!-- Input da Senha -->
+                    <div class="relative mb-6">
+                        <input type="password" id="pwdInput" oninput="analyzePassword()"
+                            placeholder="Digite uma senha para testar..."
+                            class="w-full pl-4 pr-12 py-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-xl text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+                        <button onclick="togglePwdVisibility()" type="button"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-2">
+                            <i class="fa-solid fa-eye text-lg" id="pwdVisibilityIcon"></i>
+                        </button>
+                    </div>
+
+                    <!-- Barra de Força -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">Força da Senha:</span>
+                            <span id="strengthLabel" class="text-sm font-bold text-slate-400">Insira uma senha</span>
+                        </div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 h-3 rounded-full overflow-hidden">
+                            <div id="strengthBar" class="h-full w-0 transition-all duration-500 bg-slate-400"></div>
+                        </div>
+                    </div>
+
+                    <!-- Estimativa de Tempo de Quebra -->
+                    <div
+                        class="p-4 bg-orange-50 dark:bg-slate-700/50 rounded-xl border border-orange-100 dark:border-slate-600 mb-6 flex items-start gap-3">
+                        <i class="fa-solid fa-stopwatch text-2xl text-orange-600 dark:text-orange-400 mt-1"></i>
+                        <div>
+                            <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-200">Tempo estimado para
+                                quebra (Força Bruta):</h3>
+                            <p id="crackTime"
+                                class="text-base sm:text-lg font-bold text-orange-700 dark:text-orange-300">Instantâneo
+                            </p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Baseado em supercomputadores
+                                modernos realizando bilhões de tentativas por segundo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Critérios de Validação -->
+                    <h3 class="text-sm font-semibold mb-3 text-slate-600 dark:text-slate-400">Critérios Avaliados:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm mb-4">
+                        <div id="crit-length" class="flex items-center gap-2 text-slate-400 transition-colors">
+                            <i class="fa-solid fa-circle-xmark text-red-500" id="icon-length"></i>
+                            <span>Pelo menos 12 caracteres</span>
+                        </div>
+                        <div id="crit-upper" class="flex items-center gap-2 text-slate-400 transition-colors">
+                            <i class="fa-solid fa-circle-xmark text-red-500" id="icon-upper"></i>
+                            <span>Letras Maiúsculas (A-Z)</span>
+                        </div>
+                        <div id="crit-lower" class="flex items-center gap-2 text-slate-400 transition-colors">
+                            <i class="fa-solid fa-circle-xmark text-red-500" id="icon-lower"></i>
+                            <span>Letras Minúsculas (a-z)</span>
+                        </div>
+                        <div id="crit-num" class="flex items-center gap-2 text-slate-400 transition-colors">
+                            <i class="fa-solid fa-circle-xmark text-red-500" id="icon-num"></i>
+                            <span>Números (0-9)</span>
+                        </div>
+                        <div id="crit-sym" class="flex items-center gap-2 text-slate-400 transition-colors">
+                            <i class="fa-solid fa-circle-xmark text-red-500" id="icon-sym"></i>
+                            <span>Símbolos Especiais (!@#$)</span>
+                        </div>
+                        <div id="crit-common" class="flex items-center gap-2 text-slate-400 transition-colors">
+                            <i class="fa-solid fa-circle-xmark text-red-500" id="icon-common"></i>
+                            <span>Sem padrões comuns (1234, admin)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gerador de Senhas Seguras -->
+            <div
+                class="lg:col-span-5 bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sky-600 dark:text-sky-400"></i>
+                        Gerador de Senhas
+                    </h2>
+
+                    <!-- Display de Saída da Senha Gerada -->
+                    <div class="relative mb-4">
+                        <input type="text" id="genPwdOutput" readonly placeholder="Clique em Gerar"
+                            class="w-full pl-4 pr-12 py-3 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl font-mono text-center text-base sm:text-lg text-sky-600 dark:text-sky-400 font-bold tracking-wider truncate">
+                        <button onclick="copyGeneratedPwd()" type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-sky-600 dark:hover:text-sky-400 transition"
+                            title="Copiar Senha">
+                            <i class="fa-solid fa-copy text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Configurações do Gerador -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span>Tamanho da Senha:</span>
+                                <span id="genLenVal" class="font-bold text-sky-600 dark:text-sky-400">16</span>
+                            </div>
+                            <input type="range" id="genLength" min="8" max="32" value="16" oninput="updateGenLength()"
+                                class="w-full accent-sky-600">
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            <label
+                                class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer">
+                                <span>Incluir Maiúsculas (A-Z)</span>
+                                <input type="checkbox" id="genUpper" checked
+                                    class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                            </label>
+                            <label
+                                class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer">
+                                <span>Incluir Minúsculas (a-z)</span>
+                                <input type="checkbox" id="genLower" checked
+                                    class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                            </label>
+                            <label
+                                class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer">
+                                <span>Incluir Números (0-9)</span>
+                                <input type="checkbox" id="genNum" checked
+                                    class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                            </label>
+                            <label
+                                class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer">
+                                <span>Incluir Símbolos (!@#$%)</span>
+                                <input type="checkbox" id="genSym" checked
+                                    class="w-4 h-4 rounded text-sky-600 focus:ring-sky-500">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="generateSecurePassword()"
+                    class="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-xl transition shadow flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Gerar Senha Forte
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 2: GERADOR E GUIA DE PASSPHRASES -->
+        <section id="sec-passphrase" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+            <div
+                class="lg:col-span-6 bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+                <h2 class="text-lg sm:text-xl font-bold mb-3 flex items-center gap-2 text-sky-600 dark:text-sky-400">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    O que é uma Passphrase (Frase-Chave)?
+                </h2>
+                <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                    Uma <strong>Passphrase</strong> é uma sequência de palavras aleatórias combinadas. Elas costumam ser
+                    muito mais seguras do que senhas curtas cheias de caracteres aleatórios e difíceis de lembrar.
+                </p>
+                <div class="space-y-3 text-sm">
+                    <div
+                        class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <span class="text-xs font-bold text-red-500 uppercase block mb-1">Difícil de Lembrar /
+                            Curta:</span>
+                        <code class="text-rose-600 dark:text-rose-400 font-bold break-all">X$9#mK2!pL</code>
+                        <span class="text-xs text-slate-500 block mt-1">10 caracteres (Médio risco de
+                            esquecimento)</span>
+                    </div>
+                    <div
+                        class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                        <span
+                            class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase block mb-1">Fácil
+                            de Lembrar / Ultra Segura:</span>
+                        <code
+                            class="text-emerald-700 dark:text-emerald-300 font-bold break-all">cavalo-piano-cometa-girassol-88</code>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 block mt-1">29 caracteres (Leva séculos
+                            para ser quebrada)</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+                    <h3 class="font-semibold text-sm mb-2">Dicas para Criar Frases-Chave:</h3>
+                    <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                        <li>Combine 4 ou mais palavras sem relação lógica direta.</li>
+                        <li>Separe as palavras com hífen (-), espaço ou pontos.</li>
+                        <li>Adicione pelo menos um número ou símbolo especial para reforço.</li>
+                        <li>Nunca use citações populares, músicas ou provérbios famosos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                class="lg:col-span-6 bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-cubes-stacked text-orange-600 dark:text-orange-400"></i>
+                        Simulador & Gerador de Passphrases
+                    </h2>
+
+                    <!-- Output -->
+                    <div class="relative mb-6">
+                        <div id="passphraseOutput"
+                            class="w-full p-4 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl font-mono text-center text-sm sm:text-lg text-orange-600 dark:text-orange-400 font-bold break-all min-h-[64px] flex items-center justify-center">
+                            Clique em Gerar Frase
+                        </div>
+                        <button onclick="copyPassphrase()" type="button"
+                            class="absolute right-3 top-3 p-2 text-slate-500 hover:text-orange-600 dark:hover:text-orange-400 transition"
+                            title="Copiar Frase">
+                            <i class="fa-solid fa-copy text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Opções -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span>Quantidade de Palavras:</span>
+                                <span id="passWordsVal" class="font-bold text-orange-600 dark:text-orange-400">4</span>
+                            </div>
+                            <input type="range" id="passWordCount" min="3" max="6" value="4"
+                                oninput="document.getElementById('passWordsVal').innerText = this.value"
+                                class="w-full accent-orange-600">
+                        </div>
+
+                        <div class="space-y-2 text-sm">
+                            <label
+                                class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer">
+                                <span>Separador:</span>
+                                <select id="passSeparator"
+                                    class="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-1 text-xs">
+                                    <option value="-">Hífen (-)</option>
+                                    <option value=".">Ponto (.)</option>
+                                    <option value="_">Underline (_)</option>
+                                    <option value=" ">Espaço ( )</option>
+                                </select>
+                            </label>
+                            <label
+                                class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer">
+                                <span>Adicionar Número Aleatório</span>
+                                <input type="checkbox" id="passIncludeNum" checked
+                                    class="w-4 h-4 rounded text-orange-600">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="generatePassphrase()"
+                    class="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-xl transition shadow flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-shuffle"></i>
+                    Gerar Frase-Chave Memorável
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 3: SIMULADOR DE GOLPES E QUIZ INTERATIVO -->
+        <section id="sec-quiz" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+            <div class="lg:col-span-12">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+
+                    <!-- Header do Quiz -->
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
+                        <div>
+                            <h2 class="text-lg sm:text-xl font-bold flex items-center gap-2">
+                                <i class="fa-solid fa-user-ninja text-amber-500"></i>
+                                Laboratório Anti-Golpe & Phishing .Senac
+                            </h2>
+                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Examine o cenário simulado
+                                abaixo e decida se é SEGURO ou uma FRAUDE.</p>
+                        </div>
+                        <div
+                            class="flex items-center gap-4 bg-slate-100 dark:bg-slate-900 px-4 py-2 rounded-xl text-sm font-semibold self-stretch sm:self-auto justify-between sm:justify-start">
+                            <span>Pontuação: <span id="quizScore"
+                                    class="text-orange-600 dark:text-orange-400">0</span>/5</span>
+                            <span class="text-slate-300 dark:text-slate-700">|</span>
+                            <span>Cenário: <span id="quizCurrent">1</span> de 5</span>
+                        </div>
+                    </div>
+
+                    <!-- Cartão do Cenário em Exibição -->
+                    <div id="quizContainer" class="space-y-6">
+                        <!-- Conteúdo injetado via JS -->
+                    </div>
+
+                    <!-- Ações e Botões de Escolha -->
+                    <div id="quizActions" class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="answerQuiz(false)"
+                            class="w-full sm:w-1/2 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition shadow flex items-center justify-center gap-2 text-base sm:text-lg">
+                            <i class="fa-solid fa-shield-check"></i>
+                            É Seguro / Legítimo
+                        </button>
+                        <button onclick="answerQuiz(true)"
+                            class="w-full sm:w-1/2 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition shadow flex items-center justify-center gap-2 text-base sm:text-lg">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            É Golpe / Fraude!
+                        </button>
+                    </div>
+
+                    <!-- Painel de Feedback da Resposta -->
+                    <div id="quizFeedback" class="hidden mt-6 p-5 rounded-2xl border transition-all">
+                        <h3 id="feedbackTitle" class="text-base sm:text-lg font-bold mb-2 flex items-center gap-2"></h3>
+                        <p id="feedbackDesc"
+                            class="text-xs sm:text-sm leading-relaxed mb-4 text-slate-700 dark:text-slate-200"></p>
+                        <button onclick="nextQuestion()"
+                            class="w-full sm:w-auto px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white dark:bg-slate-200 dark:hover:bg-white dark:text-slate-900 font-semibold rounded-xl transition text-sm flex items-center justify-center gap-2">
+                            Próximo Cenário <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: CHECKLIST DE SEGURANÇA -->
+        <section id="sec-checklist" class="tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+            <div
+                class="lg:col-span-8 bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-emerald-600 dark:text-emerald-400"></i>
+                            Checklist de Boas Práticas .Senac
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Marque as etapas de segurança
+                            que você já utiliza na sua rotina digital.</p>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <span id="checkPercent"
+                            class="text-2xl font-black text-emerald-600 dark:text-emerald-400">0%</span>
+                        <span class="block text-xs text-slate-400">Concluído</span>
+                    </div>
+                </div>
+
+                <!-- Barra de Progresso do Checklist -->
+                <div class="w-full bg-slate-100 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden mb-6">
+                    <div id="checkProgressBar" class="h-full bg-emerald-500 w-0 transition-all duration-300"></div>
+                </div>
+
+                <!-- Itens da Checklist -->
+                <div id="checklistItems" class="space-y-3">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+
+            <!-- Painel de Recomendações Adicionais -->
+            <div class="lg:col-span-4 space-y-6">
+                <div
+                    class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-md border border-slate-700">
+                    <h3 class="text-base sm:text-lg font-bold mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-key text-orange-400"></i>
+                        Gerenciador de Senhas
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        Nunca tente memorizar dezenas de senhas complexas nem as anote em papéis. Utilize um Gerenciador
+                        de Senhas confiável (ex: Bitwarden, 1Password, KeePass).
+                    </p>
+                    <div
+                        class="p-3 bg-slate-800/80 rounded-xl text-xs border border-slate-700 text-orange-300 font-medium">
+                        <i class="fa-solid fa-circle-info mr-1"></i> Você só precisa lembrar de UMA senha mestra forte!
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+                    <h3
+                        class="text-base sm:text-lg font-bold mb-3 flex items-center gap-2 text-sky-600 dark:text-sky-400">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        O que é Múltiplo Fator (2FA)?
+                    </h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Mesmo que um cibercriminoso descubra sua senha, o <strong>2FA/MFA</strong> exige uma segunda
+                        confirmação (código via aplicativo como Google/Microsoft Authenticator) no seu celular para
+                        autorizar o acesso.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 mt-auto py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <p>Guardião Digital <span class="text-orange-600 font-bold">.Senac</span> - Ferramenta Educativa de
+                Cibersegurança.</p>
+            <p class="text-[11px]">Nenhuma senha digitada nesta página é enviada ou salva em servidores externos. Toda
+                análise é processada localmente no seu navegador.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-slate-900 text-white text-sm px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMsg">Mensagem</span>
+    </div>
+
+    <!-- Script Externalizado -->
+    <script src="script.js"></script>
+</body>
+
+</html>
